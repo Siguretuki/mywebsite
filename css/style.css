@@ -1,3 +1,418 @@
+@charset "UTF-8";
+html {
+    font-size: 100%;
+}
+
+body {
+    color: black;
+    background-color: rgb(211, 255, 255);
+}
+
+a {
+    text-decoration: none;
+    margin: 0 auto;
+    padding: auto;
+}
+
+img {
+    max-width: 100%;
+}
+
+li {
+    list-style: none;
+}
+
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+    padding: 0 4%;
+}
+
+.site-title {
+    line-height: 1px;
+}
+
+.site-title a {
+    display: block;
+}
+
+.content-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#Photo img {
+    max-width: 100%;
+    display: list-item;
+}
+
+#hobbyimg figure {
+    max-width: 60%;
+    display: list-item;
+}
+
+
+/*header*/
+
 h1 {
-    font-size: 100px;
+    font-size: 50px;
+    color: rgb(30, 0, 100);
+    text-align: center;
+    margin: auto;
+    padding: 20px;
+    background-color: aquamarine;
+}
+
+nav ul {
+    text-align: right;
+    margin: 10px;
+    padding: 20px;
+}
+
+nav li {
+    min-width: 110px;
+    list-style: none;
+    display: inline-block;
+    text-align: right;
+    background-color: aqua;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+/*main*/
+
+#about dl {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: solid 2px aquamarine;
+    margin-bottom: 20px;
+}
+
+#about dt {
+    width: 30%;
+    border-bottom: solid 2px aquamarine;
+    padding: 15px 0;
+    margin: 0;
+}
+
+#about dd {
+    width: 70%;
+    border-bottom: solid 2px aquamarine;
+    padding: 15px 0;
+    margin: 0;
+}
+
+.message{
+    text-align: center;
+}
+
+#news dl {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: solid 1px skyblue;
+    margin-bottom: 20px;
+}
+
+#news dt {
+    width: 30%;
+    border-bottom: solid 1px skyblue;
+    padding: 15px 0;
+    margin: 0;
+}
+
+#news dd {
+    width: 70%;
+    border-bottom: solid 1px skyblue;
+    padding: 15px 0;
+    margin: 0;
+}
+
+#Photo p {
+    text-align: center;
+    padding: 20px;
+    margin: 0 20px;
+}
+
+.photolist {
+    padding: 0;
+}
+
+#Photo li {
+    width: 60%;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+#Contact {
+    text-align: center;
+    margin: auto;
+    padding: 20px;
+}
+
+#Contact a {
+    padding: 10px auto;
+    background-color: skyblue;
+}
+
+
+/*footer*/
+
+footer {
+    text-align: center;
+    background-color: aquamarine;
+    padding: 10px;
+    margin: auto;
+}
+
+
+/*visit*/
+
+.visit-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 65px;
+}
+
+.visit-img {
+    max-width: 80%;
+    margin-bottom: 20px;
+}
+
+.side-text {
+    font-size: large;
+}
+
+
+/*hobby*/
+
+.hobbyimg {
+    background-color: skyblue;
+}
+
+
+/*contact*/
+
+.form-group {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.form-btn {
+    margin: 30px 0;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #999;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: #032559;
+    outline: none;
+}
+
+button[type="submit"] {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    opacity: 0.65;
+}
+
+.form-btn {
+    max-width: 60%;
+    padding: 20px;
+    margin: auto;
+    background-color: skyblue;
+}
+
+@media screen and (min-width:768px) {
+    /*header*/
+    h1 {
+        font-size: 50px;
+        color: rgb(30, 0, 100);
+        text-align: center;
+        margin: auto;
+        padding: 20px;
+        background-color: aquamarine;
+    }
+    nav ul {
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+        padding: 20px;
+    }
+    nav li {
+        list-style: none;
+        display: inline-block;
+        width: 15%;
+        background-color: aqua;
+        padding: 10px;
+        text-align: center;
+    }
+    /*main*/
+    #about dl {
+        display: flex;
+        flex-wrap: wrap;
+        border-top: solid 2px aquamarine;
+        margin-bottom: 20px;
+    }
+    #about dt {
+        width: 30%;
+        border-bottom: solid 2px aquamarine;
+        padding: 15px 0;
+        margin: 0;
+    }
+    #about dd {
+        width: 70%;
+        border-bottom: solid 2px aquamarine;
+        padding: 15px 0;
+        margin: 0;
+    }
+    #news dl {
+        display: flex;
+        flex-wrap: wrap;
+        border-top: solid 1px skyblue;
+        margin-bottom: 20px;
+    }
+    #news dt {
+        width: 30%;
+        border-bottom: solid 1px skyblue;
+        padding: 15px 0;
+        margin: 0;
+    }
+    #news dd {
+        width: 70%;
+        border-bottom: solid 1px skyblue;
+        padding: 15px 0;
+        margin: 0;
+    }
+    #Photo p {
+        text-align: center;
+        padding: 20px;
+        margin: 0 20px;
+    }
+    .photolist {
+        display: flex;
+        justify-content: center;
+    }
+    #Photo ul li {
+        width: 32%;
+    }
+    #Photo ul li:nth-child(3n-1) {
+        margin: 0 2%;
+    }
+    #Contact {
+        text-align: center;
+        margin: auto;
+        padding: 20px;
+    }
+    #Contact a {
+        padding: 10px 100px;
+        background-color: skyblue;
+    }
+    /*footer*/
+    footer {
+        text-align: center;
+        background-color: aquamarine;
+        padding: 10px;
+        margin: auto;
+    }
+    /*hobby*/
+    .hobbyimg {
+        display: flex;
+        background-color: skyblue;
+    }
+    .hobbyimg section {
+        width: 100%;
+        margin-left: 0px;
+    }
+    .hobbyimg img {
+        flex: none;
+    }
+    /*visit*/
+    .flex {
+        display: flex; /*横並び*/
+      }
+      .flex .visit-img {
+        width: 200%; /*画像サイズ指定*/
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: relative;
+      }
+      .flex .right {
+        margin: 0 0 0 20px;
+        padding: 0;
+      }
+      .flex .visit-title {
+        margin: 0;
+        padding: 0;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .flex .side-text {
+        margin: 50px 0 0;
+        padding: 0;
+      }
+    /*contact*/
+    .form-group {
+        max-width: 60%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+    .form-label {
+        display: block;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .form-btn {
+        margin: 30px 0;
+        text-align: center;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #999;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+        border-color: #032559;
+        outline: none;
+    }
+    button[type="submit"] {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    button[type="submit"]:hover {
+        opacity: 0.65;
+    }
+    .form-btn {
+        max-width: 60%;
+        padding: 20px;
+        margin: auto;
+        background-color: skyblue;
+    }
 }

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>田中のおうち</title>
+    <meta name="description" content="田中のおうちをのぞいてみましょう">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/icon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header class="header">
+        <h1>
+            田中にお問い合わせ
+        </h1>
+
+        <nav class="nav">
+            <ul>
+                <li class="nav-li"><a href="../index.html" title="home">ホーム</a></li>
+                <li class="nav-li"><a href="../visit/index.html" title="visit">おでかけ</a></li>
+                <li class="nav-li"><a href="../hobby/index.html" title="hobby">趣味</a></li>
+                <li class="nav-li">お問い合わせ</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="wrapper">
+            <h2 class="content-title">
+                お問い合わせフォーム
+            </h2>
+            <form action="https://formspree.io/f/mpznjeee" method="post">
+                <div class="form-group">
+                    <label for="yourName" class="form-label">お名前</label>
+                    <div class="form-col">
+                        <input type="text" name="お名前" id="yourName">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="yourEmail" class="form-label">E-Mail</label>
+                    <div class="form-col">
+                        <input type="email" name="E-Mail" id="yourEmail">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="yourInquiry" class="form-label">お問い合わせ内容</label>
+                    <div class="form-col">
+                        <textarea name="お問い合わせ内容" id="yourInquiry" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-btn">
+                    <button type="submit">送信する</button>
+                </div>
+
+
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>copylight 2022 sigulene</p>
+    </footer>
+</body>

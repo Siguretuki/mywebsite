@@ -1,12 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
+
 <head>
-    <meta charset="UTF-8">
-    <title>testwebsite</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <meta charset="UTF-8" />
+    <title>田中のおうち</title>
+    <meta name="description" content="田中のおうちをのぞいてみましょう" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="./img/icon.ico" type="image/x-icon">
 </head>
+
 <body>
-    <h1>hello,world!</h1>
-    <p>hello,world!</p>
+    <header class="header">
+        <h1>田中のおうち</h1>
+
+        <nav class="nav">
+            <ul>
+                <li class="nav-li">ホーム</li>
+                <li class="nav-li">
+                    <a href="./visit/index.html" title="visit">おでかけ</a>
+                </li>
+                <li class="nav-li">
+                    <a href="./hobby/index.html" title="hobby">趣味</a>
+                </li>
+                <li class="nav-li">
+                    <a href="./news/index.html" title="contact">ニュース</a>
+                </li>
+                <li class="nav-li">
+                    <a href="./contact/index.html" title="contact">お問い合わせ</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about" class="wrapper">
+            <img src="./img/header.jpg" alt="sigureヘッダー" />
+            <h2 class="content-title">About</h2>
+            <dl>
+                <dt>名前</dt>
+                <dd>SIGULENE</dd>
+                <dt>出身</dt>
+                <dd>京都</dd>
+                <dt>学校</dt>
+                <dd>京都デザイン＆テクノロジー専門学校</dd>
+                <dt>専攻</dt>
+                <dd>ホワイトハッカー</dd>
+            </dl>
+            <p>始めまして。SIGULENEと申します。よろしくお願いいたします。</p>
+        </section>
+
+        <section id="news" class="wrapper">
+            <h2 class="content-title">News</h2>
+            <div class="message">
+            <p>💙最新ニュース💙</p>
+        </div>
+            <dl>
+                <dt>2022.10.20</dt>
+                <dd>10月10日のCTFコンテストの結果…</dd>
+                <dt>2022.08.25</dt>
+                <dd>課題が完成しました！</dd>
+                <dt>2022.08.15</dt>
+                <dd>ふと課題のことを思い出し焦り始めます…。</dd>
+                <dt>2022.08.08</dt>
+                <dd>しばらく3時寝14時起きの不健康生活が始まります…。</dd>
+                <dt>2022.07.28</dt>
+                <dd>寝不足気味で昼夜が逆転し始めます…。</dd>
+                <dt>2022.07.22</dt>
+                <dd>ゲームのランク上げに夢中で課題のことを忘れています…。</dd>
+                <dt>2022.07.15</dt>
+                <dd>最終課題に着手しました！</dd>
+                <dt>2022.07.08</dt>
+                <dd>最終課題の構想を始めます！</dd>
+            </dl>
+        </section>
+
+        <section id="Photo" class="wrapper">
+            <h2 class="content-title">Favorite</h2>
+            <p>画像クリックで詳細へ飛べます。</p>
+            <ul class="photolist">
+                <li>
+                    <a href="./hobby/index.html#sigure"><img src="./img/main_sigure.jpg" alt="sigure" /></a>
+                </li>
+                <li>
+                    <a href="./visit/index.html#ryokou"><img src="./img/main_ryokou.jpg" alt="ryokou1" /></a>
+                </li>
+                <li>
+                    <a href="./visit/index.html#hanabi"><img src="./img/main_hanabi.jpg" alt="hanabi" /></a>
+                </li>
+            </ul>
+            <ul class="photolist">
+                <li>
+                    <a href="./hobby/index.html#neko"><img src="./img/main_neko_float.jpg" alt="neko" onmouseover="this.src='./img/main_neko.jpg'" onmouseout="this.src='./img/main_neko_float.jpg'" /></a>
+                </li>
+                <li>
+                    <a href="./visit/index.html#blue"><img src="./img/main_blue.jpg" alt="blue" /></a>
+                </li>
+                <li>
+                    <a href="./visit/index.html#yo-ziya"><img src="./img/main_yo-ziya.jpg" alt="yo-ziya" /></a>
+                </li>
+            </ul>
+        </section>
+
+        <section id="Contact" class="wrapper">
+            <h2 class="content-title">Contact</h2>
+            <a href="./contact/index.html">お問い合わせはこちらから</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>copylight 2022 sigulene</p>
+    </footer>
 </body>
+
 </html>
