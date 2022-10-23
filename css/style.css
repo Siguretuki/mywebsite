@@ -178,6 +178,7 @@ footer {
     font-size: 1.5rem;
     text-align: center;
     margin-bottom: 65px;
+    font-size: 36px;
 }
 
 .visit-img {
@@ -186,15 +187,28 @@ footer {
 }
 
 .side-text {
-    font-size: large;
+    font-size: 22px;
 }
 
 
 /*hobby*/
 
-.hobbyimg {
-    background-color: skyblue;
+.hobby-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 65px;
+    font-size: 36px;
 }
+
+.hobby-img {
+    max-width: 80%;
+    margin-bottom: 20px;
+}
+
+.side-text {
+    font-size: 22px;
+}
+
 
 
 /*contact*/
@@ -341,23 +355,38 @@ button[type="submit"]:hover {
         margin: auto;
     }
     /*hobby*/
-    .hobbyimg {
-        display: flex;
-        background-color: skyblue;
+    .flex {
+        display: flex; /*横並び*/
     }
-    .hobbyimg section {
-        width: 100%;
-        margin-left: 0px;
+    .flex .hobby-img {
+      width: 700px; /*画像サイズ指定*/
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
     }
-    .hobbyimg img {
-        flex: none;
+    .flex .right {
+        width: 70%;
+      margin: 0 0 0 20px;
+      padding: 0;
+    }
+    .flex .hobby-title {
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+      font-size: 36px;
+    }
+    .flex .side-text {
+      margin: 50px 0 0;
+      padding: 0;
+      font-size: 22px;
     }
     /*visit*/
     .flex {
         display: flex; /*横並び*/
       }
       .flex .visit-img {
-        width: 200%; /*画像サイズ指定*/
+        width: 700px; /*画像サイズ指定*/
         margin: 0;
         padding: 0;
         overflow: hidden;
@@ -371,11 +400,12 @@ button[type="submit"]:hover {
         margin: 0;
         padding: 0;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 36px;
       }
       .flex .side-text {
         margin: 50px 0 0;
         padding: 0;
+        font-size: 22px;
       }
     /*contact*/
     .form-group {
