@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>フラッシュ暗算</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            text-align: center;
+            padding: 20px;
+            height: 100vh;
+            position: relative;
+        }
+        #numberDisplay {
+            font-size: 8rem;
+            font-weight: bold;
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #result {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            display: inline-block;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .correct {
+            border: 3px solid red;
+            background-color: white;
+            color: red;
+        }
+        .incorrect {
+            border: 3px solid blue;
+            background-color: white;
+            color: blue;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .num-pad button {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            margin: 5px;
+        }
+        .answer-controls {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1 class="mb-4">フラッシュ暗算</h1>
+        <div id="numberDisplay">---</div>
+        <div id="result"></div>
+        
+        <!-- 問題設定部分（中央下） -->
+        <div class="controls">
+            <label for="digitCount" class="form-label">桁数:</label>
+            <input type="number" id="digitCount" class="form-control" value="2" min="1">
+            <label for="numberCount" class="form-label">口数:</label>
+            <input type="number" id="numberCount" class="form-control" value="5" min="1">
+            <label for="displayTime" class="form-label">表示時間（秒）:</label>
+            <input type="number" id="displayTime" class="form-control" value="5" min="0.1" step="0.1">
+            <button class="btn btn-primary mt-2" onclick="startFlashAnzan()">スタート</button>
+            <button class="btn btn-secondary mt-2" onclick="resetGame()">リセット</button>
+        </div>
+
+        <!-- 回答入力部分（右下） -->
+        <div class="answer-controls">
+            <input type="number" id="userAnswer" class="form-control mb-2" placeholder="答えを入力">
+            <div class="num-pad">
+                <button class="btn btn-light" onclick="addNumber(1)">1</button>
+                <button class="btn btn-light" onclick="addNumber(2)">2</button>
+                <button class="btn btn-light" onclick="addNumber(3)">3</button><br>
+                <button class="btn btn-light" onclick="addNumber(4)">4</button>
+                <button class="btn btn-light" onclick="addNumber(5)">5</button>
+                <button class="btn btn-light" onclick="addNumber(6)">6</button><br>
+                <button class="btn btn-light" onclick="addNumber(7)">7</button>
+                <button class="btn btn-light" onclick="addNumber(8)">8</button>
+                <button class="btn btn-light" onclick="addNumber(9)">9</button><br>
+                <button class="btn btn-light" onclick="clearAnswer()">C</button>
+                <button class="btn btn-light" onclick="addNumber(0)">0</button>
+                <button class="btn btn-success" onclick="checkAnswer()">✔</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let numbers = [];
+        let index = 0;
+        let total = 0;
+        let timer;
+        
+        function startFlashAnzan() {
+            const digitCount = Math.max(1, parseInt(document.getElementById('digitCount').value, 10));
+            const numberCount = Math.max(1, parseInt(document.getElementById('numberCount').value, 10));
+            const displayTime = Math.max(100, parseFloat(document.getElementById('displayTime').value) * 1000);
+            
+            const minNumber = Math.pow(10, digitCount - 1);
+            const maxNumber = Math.pow(10, digitCount) - 1;
+            numbers = Array.from({ length: numberCount }, () => 
+                Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber
+            );
+            
+            total = numbers.reduce((a, b) => a + b, 0);
+            index = 0;
+            document.getElementById('numberDisplay').textContent = "";
+            document.getElementById('result').textContent = "";
+            document.getElementById('result').className = "";
+            
+            // 入力欄をクリア
+            document.getElementById('userAnswer').value = '';
+            
+            // 表示時間を一口当たりに分割
+            const timePerNumber = displayTime / numberCount;
+            startCountdown(timePerNumber);
+        }
+        
+        function startCountdown(timePerNumber) {
+            let countdown = 3;
+            document.getElementById('numberDisplay').textContent = countdown;
+            let countdownInterval = setInterval(() => {
+                countdown--;
+                if (countdown > 0) {
+                    document.getElementById('numberDisplay').textContent = countdown;
+                } else {
+                    clearInterval(countdownInterval);
+                    document.getElementById('numberDisplay').textContent = "";
+                    showNumbers(timePerNumber);
+                }
+            }, 1000);
+        }
+        
+        function showNumbers(timePerNumber) {
+            if (index < numbers.length) {
+                document.getElementById('numberDisplay').textContent = numbers[index];
+                index++;
+                timer = setTimeout(() => showNumbers(timePerNumber), timePerNumber);
+            } else {
+                setTimeout(() => {
+                    document.getElementById('numberDisplay').textContent = "?";
+                }, timePerNumber);
+            }
+        }
+        
+        function checkAnswer() {
+            let userAnswer = parseInt(document.getElementById('userAnswer').value, 10);
+            let resultElement = document.getElementById('result');
+            if (userAnswer === total) {
+                resultElement.textContent = "正解！";
+                resultElement.className = "correct";
+            } else {
+                resultElement.textContent = `不正解。正解は ${total} です。`;
+                resultElement.className = "incorrect";
+            }
+        }
+
+        function addNumber(num) {
+            const userAnswerElement = document.getElementById('userAnswer');
+            userAnswerElement.value += num;
+        }
+
+        function clearAnswer() {
+            document.getElementById('userAnswer').value = '';
+        }
+
+        function resetGame() {
+            clearTimeout(timer);
+            document.getElementById('numberDisplay').textContent = "---";
+            document.getElementById('result').textContent = "";
+            document.getElementById('result').className = "";
+            document.getElementById('userAnswer').value = '';
+        }
+    </script>
+</body>
+</html>
