@@ -156,9 +156,7 @@
                 index++;
                 timer = setTimeout(() => showNumbers(timePerNumber), timePerNumber);
             } else {
-                setTimeout(() => {
-                    document.getElementById('numberDisplay').textContent = "?";
-                }, timePerNumber);
+                document.getElementById('numberDisplay').textContent = "?";
             }
         }
         
