@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>フラッシュ暗算</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      text-align: center;
+      padding: 20px;
+      height: 100vh;
+      position: relative;
+    }
+    #numberDisplay {
+      font-size: 8rem;
+      font-weight: bold;
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #result {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 20px;
+      padding: 10px;
+      display: inline-block;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .correct {
+      border: 3px solid red;
+      background-color: white;
+      color: red;
+    }
+    .incorrect {
+      border: 3px solid blue;
+      background-color: white;
+      color: blue;
+    }
+    .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .num-pad button {
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      margin: 5px;
+    }
+    .answer-controls {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .difficulty-controls {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .difficulty-controls button {
+      margin-bottom: 10px;
+    }
+    .active-button {
+      background-color: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <h1 class="mb-4">フラッシュ暗算</h1>
+    <div id="numberDisplay">---</div>
+    <div id="result"></div>
+    <div class="difficulty-controls">
+      <label class="form-label h2">難易度</label>
+      <button id="beginner-2" class="btn btn-outline-primary" onclick="setDifficulty('beginner', 2)">入門初級 1桁2口<br>4までの数字 加算</button>
+      <button id="beginner-3" class="btn btn-outline-primary" onclick="setDifficulty('beginner', 3)">入門初級 1桁3口<br>4までの数字 加算</button>
+      <button id="intermediate-2" class="btn btn-outline-primary" onclick="setDifficulty('intermediate', 2)">入門中級 1桁2口<br>9までの数字 加算</button>
+      <button id="intermediate-3" class="btn btn-outline-primary" onclick="setDifficulty('intermediate', 3)">入門中級 1桁3口<br>9までの数字 加算</button>
+    </div>
+    <div class="answer-controls">
+      <input type="number" id="userAnswer" class="form-control mb-2" placeholder="答えを入力">
+      <div class="num-pad">
+        <button class="btn btn-light" onclick="addNumber(1)">1</button>
+        <button class="btn btn-light" onclick="addNumber(2)">2</button>
+        <button class="btn btn-light" onclick="addNumber(3)">3</button><br>
+        <button class="btn btn-light" onclick="addNumber(4)">4</button>
+        <button class="btn btn-light" onclick="addNumber(5)">5</button>
+        <button class="btn btn-light" onclick="addNumber(6)">6</button><br>
+        <button class="btn btn-light" onclick="addNumber(7)">7</button>
+        <button class="btn btn-light" onclick="addNumber(8)">8</button>
+        <button class="btn btn-light" onclick="addNumber(9)">9</button><br>
+        <button class="btn btn-light" onclick="clearAnswer()">C</button>
+        <button class="btn btn-light" onclick="addNumber(0)">0</button>
+        <button class="btn btn-success" onclick="checkAnswer()">✔</button>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn btn-primary mt-2" onclick="startFlashAnzan()">スタート</button>
+    </div>
+  </div>
+  <script>
+    let numbers = [];
+    let index = 0;
+    let total = 0;
+    let timer;
+
+    let difficulty = 'beginner';
+    let numberCount = 2;
+    let digitCount = 1;
+    let displayTime = 2;
+
+    const problems = {
+      beginner: {
+        2: [[1, 2], [1, 3], [2, 2]],
+        3: [[1, 1, 1], [1, 1, 2]],
+      },
+      intermediate: {
+        2: [[5, 1], [5, 2], [5, 3], [5, 4], [6, 1], [6, 2], [6, 3], [7, 2], [7, 1], [8, 1]],
+        3: [[5, 1, 1], [5, 1, 2], [5, 1, 3], [6, 1, 1], [6, 1, 2], [7, 1, 1]],
+      }
+    };
+
+    function setDifficulty(level, count) {
+      difficulty = level;
+      numberCount = count;
+      digitCount = 1;
+      displayTime = count === 2 ? 2 : 3;
+
+      // 選択したボタンにアクティブクラスを追加
+      resetDifficultyButtons();
+      const buttonId = `${level}-${count}`;
+      document.getElementById(buttonId).classList.add('active-button');
+    }
+
+    function resetDifficultyButtons() {
+      const buttons = document.querySelectorAll('.difficulty-controls button');
+      buttons.forEach(button => button.classList.remove('active-button'));
+    }
+
+    function startFlashAnzan() {
+      // 正解不正解のリセット
+      const resultElement = document.getElementById('result');
+      resultElement.textContent = '';
+      resultElement.classList.remove('correct', 'incorrect');
+      
+      document.getElementById('userAnswer').value = '';
+      
+      // カウントダウンを開始
+      startCountdown();
+    }
+
+    function startCountdown() {
+      let countdown = 3;
+      document.getElementById('numberDisplay').textContent = countdown;
+      changeCountdownColor(countdown);
+      let countdownInterval = setInterval(() => {
+        countdown--;
+        if (countdown > 0) {
+          document.getElementById('numberDisplay').textContent = countdown;
+          changeCountdownColor(countdown);
+        } else {
+          clearInterval(countdownInterval);
+          document.getElementById('numberDisplay').textContent = "";
+          setTimeout(() => {
+            showNumbers();
+          }, 100); // 0.1秒後に問題を表示
+          // カウントダウン終了後に色を黒に戻す
+          setTimeout(() => {
+            document.getElementById('numberDisplay').style.color = "black";
+          }, 100);
+        }
+      }, 1000);
+    }
+
+    function changeCountdownColor(countdown) {
+      const display = document.getElementById('numberDisplay');
+      if (countdown === 3) {
+        display.style.color = "red";
+      } else if (countdown === 2) {
+        display.style.color = "blue"; // 青色に変更
+      } else if (countdown === 1) {
+        display.style.color = "green";
+      }
+    }
+
+    function showNumbers() {
+      const problemSet = problems[difficulty][numberCount];
+      numbers = problemSet[Math.floor(Math.random() * problemSet.length)];
+      total = numbers.reduce((a, b) => a + b, 0);
+      index = 0;
+
+      displayNextNumber();
+    }
+
+    function displayNextNumber() {
+      if (index < numbers.length) {
+        document.getElementById('numberDisplay').textContent = numbers[index];
+        index++;
+        // 数字を表示した後、0.1秒後に次の数字を表示
+        setTimeout(() => {
+          document.getElementById('numberDisplay').textContent = "";
+          setTimeout(displayNextNumber, 100); // 0.1秒後に次の数字を表示
+        }, 1000);
+      } else {
+        // 最後の数字を表示したら、すぐに"?"に切り替える
+        document.getElementById('numberDisplay').textContent = "?";
+      }
+    }
+
+    function checkAnswer() {
+      let userAnswer = parseInt(document.getElementById('userAnswer').value, 10);
+      let resultElement = document.getElementById('result');
+      if (userAnswer === total) {
+        resultElement.textContent = "正解！";
+        resultElement.className = "correct";
+      } else {
+        resultElement.textContent = `不正解。正解は ${total} です。`;
+        resultElement.className = "incorrect";
+      }
+    }
+
+    function addNumber(num) {
+      const userAnswerElement = document.getElementById('userAnswer');
+      userAnswerElement.value += num;
+    }
+
+    function clearAnswer() {
+      document.getElementById('userAnswer').value = '';
+    }
+  </script>
+</body>
+</html>
