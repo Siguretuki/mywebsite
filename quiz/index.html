@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画像クイズアプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="quiz-container">
+        <h1 id="status-message">Loading...</h1>
+        
+        <div id="quiz-area" style="display: none;">
+            
+            <p id="question-number"></p>
+            
+            <div id="image-box">
+                <img id="question-image" src="" alt="問題画像">
+            </div>
+
+            <p id="question-text"></p>
+
+            <div id="answer-form">
+                <input type="text" id="answer-input" placeholder="ひらがなで入力してください">
+                <button id="submit-button">判定</button>
+            </div>
+            
+            <p id="result-message"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

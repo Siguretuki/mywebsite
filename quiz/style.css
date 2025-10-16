@@ -1,0 +1,78 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f4f4f9;
+}
+
+#quiz-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+#image-box {
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    max-width: 600px; /* 画像の最大高さを制限 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#question-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+#answer-form {
+    margin-top: 20px;
+}
+
+#answer-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: calc(70% - 12px);
+    margin-right: 10px;
+}
+
+#submit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#submit-button:hover {
+    background-color: #0056b3;
+}
+
+#result-message {
+    font-weight: bold;
+    margin-top: 15px;
+    min-height: 20px; /* メッセージ表示エリアを確保 */
+}
+
+/* 正否メッセージの色 */
+.correct {
+    color: green;
+}
+.incorrect {
+    color: red;
+}
