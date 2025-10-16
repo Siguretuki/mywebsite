@@ -1,8 +1,8 @@
 // ===========================================
 // microCMS 設定 (ご自身の情報に置き換えてください)
 // ===========================================
-const SERVICE_DOMAIN = Process.env.SERVICE_DOMAIN;
-const API_KEY = Process.env.API_KEY;
+const SERVICE_DOMAIN = process.env.SERVICE_DOMAIN;
+const API_KEY = process.env.API_KEY;
 const ENDPOINT = "blogs";
 const API_URL = `https://${SERVICE_DOMAIN}.microcms.io/api/v1/${ENDPOINT}`;
 
@@ -178,4 +178,5 @@ answerInputEl.addEventListener('keypress', (e) => {
 });
 
 // アプリケーションの開始
+
 initQuiz();
