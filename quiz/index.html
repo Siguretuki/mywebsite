@@ -29,7 +29,15 @@
             <p id="result-message"></p>
         </div>
     </div>
+  <script>
+    // Netlifyの環境変数をビルド時にHTMLに埋め込む（サーバー側でレンダリングする必要あり）
+    window.ENV = {
+      SERVICE_DOMAIN: '{{ SERVICE_DOMAIN }}',
+      API_KEY: '{{ API_KEY }}'
+    };
+  </script>
 
     <script src="script.js"></script>
 </body>
+
 </html>
